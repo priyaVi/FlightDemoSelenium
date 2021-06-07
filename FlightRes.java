@@ -40,8 +40,9 @@ public class FlightRes {
 	@Test
 	@Parameters({"name","address","city","state","zipcode","creditcardno","month","year"})
 	
-	public void FlightDemo(String name, String address, String city,String state,String zipcode,String creditcardno,String month,String year) {
+	public void FlightDemo(String name, String address, String city,String state,String zipcode,String creditcardno,String month,String year) throws InterruptedException {
 		
+//-----------------------Find flight------------------------------
 		String Title=driver.getTitle();
 		System.out.println(Title);
 		Assert.assertEquals(Title, "BlazeDemo" , "Title is not matched");
@@ -53,14 +54,19 @@ public class FlightRes {
 		toPort.selectByVisibleText("Berlin");
 		
 		driver.findElement(By.className("btn-primary")).click();
+		Thread.sleep(200);
+		
+//-----------------------Choose flight--------------------------------
 		String Title1=driver.getTitle();
 		Assert.assertEquals(Title1, "BlazeDemo - reserve" , "Title1 is not matched");
 		
 		driver.findElement(By.xpath("(//*[@class='btn btn-small'])[2]")).click();
 		
+		Thread.sleep(200);
+		
 		String Title2=driver.getTitle();
 		Assert.assertEquals(Title2, "BlazeDemo Purchase" , "Title2 is not matched");
-		
+//------------------------Book flight----------------------------------------		
 		driver.findElement(By.name("inputName")).clear();
 		driver.findElement(By.name("inputName")).sendKeys(name);
 		driver.findElement(By.name("address")).clear();
@@ -87,6 +93,9 @@ public class FlightRes {
 		driver.findElement(By.id("nameOnCard")).sendKeys(name);
 		
 		driver.findElement(By.className("btn-primary")).click();
+		
+		Thread.sleep(200);
+//---------------------Booking Confirmation page----------------------------
 		
 		String Title3=driver.getTitle();
 		
